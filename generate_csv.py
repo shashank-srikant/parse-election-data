@@ -45,6 +45,7 @@ def generate_csv_mla(folder_txts, csv_pth):
     df.to_csv(csv_pth, index=False)
 
 def generate_csv_bbmp(folder_txts, csv_pth):
+    records = []
     txts = os.listdir(folder_txts)
     for t in tqdm(txts):
         if '.txt' not in t:
@@ -52,7 +53,6 @@ def generate_csv_bbmp(folder_txts, csv_pth):
         with open(os.path.join(folder_txts, t), 'r') as fp:
             txt_content = fp.read()
         lines = txt_content.split('\n')
-        records = []
         name, guardian_name, house_number, age, gender = '', '', '', '', ''
         details = t.split('_')
         pdf_name, page_number, loc = details[0], details[1], details[2]+"_"+details[2]
@@ -109,7 +109,7 @@ def generate_csv_bbmp(folder_txts, csv_pth):
                 print("{}**{}|{}|{}|{}|{}".format(l, name, guardian_name, house_number, age_str, gender_str))
         records.append([name, guardian_name, house_number, age, gender, pdf_name, page_number, loc])
 
-    df = pd.DataFrame(records, columns=['name', 'mother_name', 'house_number', 'age', 'gender', 'PDF_name', 'page_number', 'loc_on_page'])
+    df = pd.DataFrame(records, columns=['name', 'guardian_name', 'house_number', 'age', 'gender', 'PDF_name', 'page_number', 'loc_on_page'])
     df.to_csv(csv_pth, index=False)
 
 
