@@ -3,6 +3,7 @@ import sys
 import pandas as pd
 
 def generate_csv(folder_txts, csv_pth):
+    pdf_name = os.path.basename(folder_txts)
     txts = os.listdir(folder_txts)
     for t in txts:
         if '.txt' not in t:
@@ -12,6 +13,9 @@ def generate_csv(folder_txts, csv_pth):
         lines = txt_content.split('\n')
         records = []
         name, mother_name, house_number, age, gender = '', '', '', '', ''
+        details = t.split('_')
+        page_number, loc = details[0], details[1]+"_"+details[2]
+
         for l in lines:
             if 'Name' in l and 'Mother' not in l:
                 name = l.split(':')[1].strip()
@@ -34,12 +38,11 @@ def generate_csv(folder_txts, csv_pth):
                     idx = gender.lower().index(word) + len(word)
                     gender = gender[:idx]
         
-        records.append([name, mother_name, house_number, age, gender])
+        records.append([name, mother_name, house_number, age, gender, pdf_name, page_number, loc])
 
-    df = pd.DataFrame(records, columns=['Name', 'Mother-name', 'House-number', 'Age', 'Gender'])
+    df = pd.DataFrame(records, columns=['name', 'mother_name', 'house_number', 'age', 'gender', 'PDF_name', 'page_number', 'loc_on_page'])
     df.to_csv(csv_pth, index=False)
 
 if __name__=="__main__":
-    generate_csv(sys.argv[1], sys.argv[2])
-
+    generate_csv(sys.argv[1], os.path.join(sys.argv[2]))
 

@@ -1,2 +1,2 @@
-Name,Mother-name,House-number,Age,Gender
-DARSHAN R,RATHNA,20,28,MALE
+name,mother_name,house_number,age,gender,PDF_name,page_number,loc_on_page
+DARSHAN R,RATHNA,20,28,MALE,data,sample,parsed_card.txt
