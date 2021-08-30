@@ -41,5 +41,5 @@ $ pip install -r ./scripts/requirements.txt
 
  - To convert the parsed text into a CSV
  ```
- python generate_csv /path/to/folder/having/txt/files /path/to/dump/csv
+ python generate_csv.py /path/to/folder/having/txt/files /path/to/dump/csv
  ```
