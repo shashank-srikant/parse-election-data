@@ -28,6 +28,9 @@ Thanks to [Pushpendre](https://github.com/se4u) for setting this up.
 $ pip install -r ./scripts/requirements.txt
 ```
 
+ - Install Tesseract-4 (and not 3). Instructions at bottom of this blog -- https://medium.com/quantrium-tech/installing-tesseract-4-on-ubuntu-18-04-b6fcd0cbd78f
+ 
+
  - To run the script to parse the PDF into image cards
  ```
  $ python parse.py /path/to/folder/containing/pdfs /path/to/folder/in/which/to/dump/card/jpegs
