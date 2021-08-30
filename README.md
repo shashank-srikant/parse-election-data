@@ -30,7 +30,16 @@ $ pip install -r ./scripts/requirements.txt
 
  - To run the script to parse the PDF into image cards
  ```
- $ python parse.py /path/to/single/pdf /path/to/folder/in/which/to/dump/card/jpegs
+ $ python parse.py /path/to/folder/containing/pdfs /path/to/folder/in/which/to/dump/card/jpegs
+```
+
+- To convert the image cards into text
+```
  $ cd /path/to/folder/in/which/to/dump/card/jpegs
  $ for e in *.jpeg ; do echo  $e ${e%jpeg}  --psm 6 2>/dev/null ; done | head | xargs -P 8 -n 1 echo tesseract
+ ```
+
+ - To convert the parsed text into a CSV
+ ```
+ python generate_csv /path/to/folder/having/txt/files /path/to/dump/csv
  ```

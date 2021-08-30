@@ -41,4 +41,11 @@ def card_extractor(input_pdf_path, output_dir):
 
 input_pdf_path = sys.argv[1] 
 output_dir = sys.argv[2]
-cards = card_extractor(input_pdf_path, output_dir)
+pdfs = os.listdir(input_pdf_path)
+for p in pdfs:
+    if '.pdf' not in p:
+        continue
+    output_dir_pdf = os.path.join(output_dir, p)
+    if not os.path.exists(output_dir_pdf):
+        os.makedirs(output_dir_pdf)
+    cards = card_extractor(os.path.join(input_pdf_path, p), output_dir_pdf)
