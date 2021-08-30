@@ -1,0 +1,4 @@
+pytesseract
+PyPDF2
+pillow
+
