@@ -24,6 +24,9 @@ Thanks to [Pushpendre](https://github.com/se4u) for setting this up.
  ```
 
  - Install the requirements via pip within `election-data`.
+```
+$ pip install -r ./scripts/requirements.txt
+```
 
  - To run the script to parse the PDF into image cards
  ```
