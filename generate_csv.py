@@ -45,6 +45,19 @@ def generate_csv_mla(folder_txts, csv_pth):
     df.to_csv(csv_pth, index=False)
 
 def generate_csv_bbmp(folder_txts, csv_pth):
+    def get_house_number(s):
+        house_split = s.split(':')
+        if len(house_split) < 2:
+            house_split = l.split('.')
+            if len(house_split) < 2:
+                house_split = []
+
+        if len(house_split) >= 2:
+            house_number = house_split[1].strip()
+        else:
+            house_number = ''
+        return house_number
+
     records = []
     txts = os.listdir(folder_txts)
     for t in tqdm(txts):
@@ -73,19 +86,18 @@ def generate_csv_bbmp(folder_txts, csv_pth):
                     guardian_name = guardian_name.replace('Nama', '')
                     guardian_name = guardian_name.replace(':','')
                     guardian_name = guardian_name.strip()
+
+                    if 'House' in guardian_name:
+                        pos_house = guardian_name.find('House')
+                        house_str = guardian_name[pos_house:]
+                        house_number = get_house_number(house_str)
                     line_two = True
                 else:
                     if 'Name:' in l:
                         name = l.split(':')[1].strip()
                         found_name = True
                     if 'House' in l:
-                        house_split = l.split(':')
-                        if len(house_split) < 2:
-                            house_split = l.split('.')
-                            if len(house_split) < 2:
-                                house_split = []
-                        if len(house_split) >= 2:
-                            house_number = house_split[1].strip()
+                        house_number = get_house_number(l)
                     if 'Age' and 'Sex' in l:
                         gender_idx = l.find('Sex')
                         age_str = l[:gender_idx]
@@ -98,9 +110,9 @@ def generate_csv_bbmp(folder_txts, csv_pth):
                         else:
                             age = age_split[1].strip()
                         word = ''
-                        if 'male' in gender.lower():
+                        if 'male' in gender_str.lower():
                             gender = 'Male'
-                        elif 'female' in gender.lower():
+                        elif 'female' in gender_str.lower():
                             gender = 'Female'
             except Exception as e:
                 import traceback 
